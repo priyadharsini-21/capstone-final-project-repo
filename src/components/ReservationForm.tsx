@@ -31,235 +31,107 @@ const ReservationForm: React.FC = () => {
         phone: Yup.string().required(translations.phoneRequired),
     });
 
-    const handleSubmit = (_: ReservationFormValues, { resetForm }: { resetForm: () => void }) => {
-        setSuccessMessage(translations.reservationSuccess);
+    const handleSubmit = (values: ReservationFormValues, { resetForm }: { resetForm: () => void }) => {
+        console.log('✅ Form Submitted:', values);
+
+        setSuccessMessage('Reservation Done Successfully!');
 
         setTimeout(() => {
+            console.log('❌ Hiding Success Message');
             setSuccessMessage(null);
             resetForm();
         }, 2000);
     };
 
     return (
-        <Formik<ReservationFormValues>
-            initialValues={{
-                date: '',
-                time: '',
-                diners: '',
-                name: '',
-                email: '',
-                phone: '',
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
-            {({ isSubmitting }) => (
-                // <Form className={styles.form} style={{ marginTop: '30px' }}>
-                //     {successMessage && <p className={styles.success}>{successMessage}</p>}
-
-                //     <div className={styles.fieldGroup}>
-                //         <label htmlFor="date">{translations.date}</label>
-                //         <Field
-                //             type="date"
-                //             name="date"
-                //             id="date"
-                //             placeholder={translations.datePlaceholder}
-                //             style={{
-                //                 height: '45px',
-                //                 fontSize: '16px',
-                //                 padding: '5px',
-                //                 borderRadius: '6px' ,
-                //                 border: '1px solid #ccc',
-                //                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.05)"
-                //             }}
-                //         />
-                //         <ErrorMessage name="date" component="p" className={styles.error} />
-                //     </div>
-
-                //     <div className={styles.fieldGroup}>
-                //         <label htmlFor="time">{translations.time}</label>
-                //         <Field as="select" name="time" id="time"
-                //         style={{
-                //             height: '45px',
-                //             fontSize: '16px',
-                //             padding: '5px',
-                //             borderRadius: '6px' ,
-                //             border: '1px solid #ccc',
-                //             boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.05)"
-                //         }}
-                //         >
-                //             <option value="">{translations.selectATime}</option>
-                //             <option value="18:00">18:00</option>
-                //             <option value="19:00">19:00</option>
-                //             <option value="20:00">20:00</option>
-                //         </Field>
-                //         <ErrorMessage name="time" component="p" className={styles.error} />
-                //     </div>
-
-                //     <div className={styles.fieldGroup}>
-                //         <label htmlFor="diners">{translations.numberOfPeople}</label>
-                //         <Field
-                //             type="number"
-                //             name="diners"
-                //             id="diners"
-                //             min="1"
-                //             placeholder={translations.dinersPlaceholder}
-                //             style={{
-                //                 height: '45px',
-                //                 fontSize: '16px',
-                //                 padding: '5px',
-                //                 borderRadius: '6px' ,
-                //                 border: '1px solid #ccc',
-                //                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.05)"
-                //             }}
-                //         />
-                //         <ErrorMessage name="diners" component="p" className={styles.error} />
-                //     </div>
-
-                //     <div className={styles.fieldGroup}>
-                //         <label htmlFor="name">{translations.name}</label>
-                //         <Field type="text" name="name" id="name" placeholder={translations.namePlaceholder} style={{
-                //                 height: '45px',
-                //                 fontSize: '16px',
-                //                 padding: '5px',
-                //                 borderRadius: '6px' ,
-                //                 border: '1px solid #ccc',
-                //                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.05)"
-                //             }}/>
-                //         <ErrorMessage name="name" component="p" className={styles.error} />
-                //     </div>
-
-                //     <div className={styles.fieldGroup}>
-                //         <label htmlFor="email">{translations.email}</label>
-                //         <Field type="email" name="email" id="email" placeholder={translations.emailPlaceholder} style={{
-                //                 height: '45px',
-                //                 fontSize: '16px',
-                //                 padding: '5px',
-                //                 borderRadius: '6px' ,
-                //                 border: '1px solid #ccc',
-                //                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.05)"
-                //             }}/>
-                //         <ErrorMessage name="email" component="p" className={styles.error} />
-                //     </div>
-
-                //     <div className={styles.fieldGroup}>
-                //         <label htmlFor="phone">{translations.phone}</label>
-                //         <Field type="tel" name="phone" id="phone" placeholder={translations.phonePlaceholder} style={{
-                //                 height: '45px',
-                //                 fontSize: '16px',
-                //                 padding: '5px',
-                //                 borderRadius: '6px' ,
-                //                 border: '1px solid #ccc',
-                //                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.05)"
-                //             }}/>
-                //         <ErrorMessage name="phone" component="p" className={styles.error} />
-                //     </div>
-
-                //     <Button
-                //         type="submit"
-                //         variant={ButtonVariant.Secondary}
-                //         label={translations.reserveATable}
-                //         onClick={() => {}}
-                //         disabled={isSubmitting}
-                //     />
-                // </Form>
-
-                <Form className={styles.form} style={{ marginTop: '30px' }}>
-                    {successMessage && <p className={styles.success}>{successMessage}</p>}
-
-                    <div className={styles.formContainer}>
-                        {/* Left Column */}
-                        <div className={styles.column}>
-                            <div className={styles.fieldGroup}>
-                                <label htmlFor="date">{translations.date}</label>
-                                <Field
-                                    type="date"
-                                    name="date"
-                                    id="date"
-                                    placeholder={translations.datePlaceholder}
-                                    className={styles.inputField}
-                                />
-                                <ErrorMessage name="date" component="p" className={styles.error} />
-                            </div>
-
-                            <div className={styles.fieldGroup}>
-                                <label htmlFor="time">{translations.time}</label>
-                                <Field as="select" name="time" id="time" className={styles.inputField}>
-                                    <option value="">{translations.selectATime}</option>
-                                    <option value="18:00">18:00</option>
-                                    <option value="19:00">19:00</option>
-                                    <option value="20:00">20:00</option>
-                                </Field>
-                                <ErrorMessage name="time" component="p" className={styles.error} />
-                            </div>
-
-                            <div className={styles.fieldGroup}>
-                                <label htmlFor="diners">{translations.numberOfPeople}</label>
-                                <Field
-                                    type="number"
-                                    name="diners"
-                                    id="diners"
-                                    min="1"
-                                    placeholder={translations.dinersPlaceholder}
-                                    className={styles.inputField}
-                                />
-                                <ErrorMessage name="diners" component="p" className={styles.error} />
-                            </div>
-                        </div>
-
-                        {/* Right Column */}
-                        <div className={styles.column}>
-                            <div className={styles.fieldGroup}>
-                                <label htmlFor="name">{translations.name}</label>
-                                <Field
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    placeholder={translations.namePlaceholder}
-                                    className={styles.inputField}
-                                />
-                                <ErrorMessage name="name" component="p" className={styles.error} />
-                            </div>
-
-                            <div className={styles.fieldGroup}>
-                                <label htmlFor="email">{translations.email}</label>
-                                <Field
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    placeholder={translations.emailPlaceholder}
-                                    className={styles.inputField}
-                                />
-                                <ErrorMessage name="email" component="p" className={styles.error} />
-                            </div>
-
-                            <div className={styles.fieldGroup}>
-                                <label htmlFor="phone">{translations.phone}</label>
-                                <Field
-                                    type="tel"
-                                    name="phone"
-                                    id="phone"
-                                    placeholder={translations.phonePlaceholder}
-                                    className={styles.inputField}
-                                />
-                                <ErrorMessage name="phone" component="p" className={styles.error} />
-                            </div>
-                        </div>
+        <>
+            {/* Success Popup */}
+            {successMessage && (
+                <div className={styles.popupOverlay}>
+                    <div className={styles.popupContent}>
+                        <p>{successMessage}</p>
+                        <button onClick={() => setSuccessMessage(null)}>OK</button>
                     </div>
-
-                    {/* Submit Button in Center */}
-                    <div className={styles.buttonContainer}>
-                        <Button
-                            type="submit"
-                            variant={ButtonVariant.Secondary}
-                            label={translations.reserveATable}
-                            onClick={() => {}}
-                            disabled={isSubmitting}
-                        />
-                    </div>
-                </Form>
+                </div>
             )}
-        </Formik>
+
+            <Formik<ReservationFormValues>
+                initialValues={{
+                    date: '',
+                    time: '',
+                    diners: '',
+                    name: '',
+                    email: '',
+                    phone: '',
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                {({ isSubmitting }) => (
+                    <Form className={styles.form} style={{ marginTop: '30px' }}>
+                        <div className={styles.formContainer}>
+                            {/* Left Column */}
+                            <div className={styles.column}>
+                                <div className={styles.fieldGroup}>
+                                    <label htmlFor="date">{translations.date}</label>
+                                    <Field type="date" name="date" id="date" className={styles.inputField} />
+                                    <ErrorMessage name="date" component="p" className={styles.error} />
+                                </div>
+
+                                <div className={styles.fieldGroup}>
+                                    <label htmlFor="time">{translations.time}</label>
+                                    <Field as="select" name="time" id="time" className={styles.inputField}>
+                                        <option value="">{translations.selectATime}</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                    </Field>
+                                    <ErrorMessage name="time" component="p" className={styles.error} />
+                                </div>
+
+                                <div className={styles.fieldGroup}>
+                                    <label htmlFor="diners">{translations.numberOfPeople}</label>
+                                    <Field type="number" name="diners" id="diners" min="1" className={styles.inputField} />
+                                    <ErrorMessage name="diners" component="p" className={styles.error} />
+                                </div>
+                            </div>
+
+                            {/* Right Column */}
+                            <div className={styles.column}>
+                                <div className={styles.fieldGroup}>
+                                    <label htmlFor="name">{translations.name}</label>
+                                    <Field type="text" name="name" id="name" className={styles.inputField} />
+                                    <ErrorMessage name="name" component="p" className={styles.error} />
+                                </div>
+
+                                <div className={styles.fieldGroup}>
+                                    <label htmlFor="email">{translations.email}</label>
+                                    <Field type="email" name="email" id="email" className={styles.inputField} />
+                                    <ErrorMessage name="email" component="p" className={styles.error} />
+                                </div>
+
+                                <div className={styles.fieldGroup}>
+                                    <label htmlFor="phone">{translations.phone}</label>
+                                    <Field type="tel" name="phone" id="phone" className={styles.inputField} />
+                                    <ErrorMessage name="phone" component="p" className={styles.error} />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className={styles.buttonContainer}>
+                            <Button
+                                type="submit"
+                                variant={ButtonVariant.Secondary}
+                                label={translations.reserveATable}
+                                disabled={isSubmitting}
+                                onClick={() => {}} // Add this to avoid the TypeScript error
+                            />
+                        </div>
+                    </Form>
+                )}
+            </Formik>
+        </>
     );
 };
 
