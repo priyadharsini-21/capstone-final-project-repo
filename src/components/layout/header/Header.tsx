@@ -3,7 +3,7 @@ import { ButtonVariant } from '../../base/button/Button.types';
 import ButtonLink from '../../base/button/ButtonLink';
 import DesktopNavigation from '../../navigation/desktop/DesktopNavigation';
 import styles from './Header.module.css';
-import LanguageSwitcher from '../../LanguageSwitcher';
+
 
 interface HeaderProps {
     isMobileMenuOpen: boolean;
@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setMobileMenuOpen }) 
 
                 <div className={styles.ctaButtons}>
                     <ButtonLink href="/reserve" variant={ButtonVariant.Secondary} label="Reserve a Table" />
-                    <LanguageSwitcher />
+                    {/* <LanguageSwitcher /> */}
                 </div>
 
                 <button
