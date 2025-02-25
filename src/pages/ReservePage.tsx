@@ -17,8 +17,30 @@ const ReservePage = () => {
                 <meta property="og:url" content="https://little-lemon-capstone-project.io/reserve" />
             </Helmet>
             <div className="container">
-                <h1>{translations.reserveATable}</h1>
-                <p>{translations.reservePageIntroduction}</p>
+                <h1
+                    style={{
+                        textAlign: 'center',
+                    }}
+                >
+                    {translations.reserveATable.toUpperCase()}
+                </h1>
+                <p
+                    style={{
+                        textAlign: 'center',
+                    }}
+                >
+                    {translations.reservePageIntroduction.toUpperCase()}
+                </p>
+
+                <hr
+                    style={{
+                        width: '636px' ,
+                        height: '2px',
+                        backgroundColor: '#F4CE14',
+                        border: 'none',
+                        margin: '10px auto' ,
+                    }}
+                />
 
                 <ReservationForm />
             </div>

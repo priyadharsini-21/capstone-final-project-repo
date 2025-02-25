@@ -34,3 +34,40 @@
 .success {
     color: green;
 }
+
+.formContainer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.inputField {
+    height: 45px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
